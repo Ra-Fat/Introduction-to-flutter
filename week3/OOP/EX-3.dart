@@ -70,7 +70,7 @@ void main(){
   var minus = dur1 - dur2;
   print("Minus Duration(D1 - D2): $minus");
 
-  // test case to make smaller dur to minus the big one
+  // test case to make smaller dur to minus the big
   print("Minus Duration(D2 - D1):");
   try{
     var invalid = dur2 - dur1;
