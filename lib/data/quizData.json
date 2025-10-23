@@ -1,0 +1,28 @@
+{
+ "id": "794aa7f1-7e5b-4871-95bd-693e2c56f9ea",
+ "questions": [
+  {
+   "id": "657cdc83-41b3-4b22-8b3a-6989b49257ea",
+   "title": "Capital of France?",
+   "choices": [
+    "Paris",
+    "London",
+    "Rome"
+   ],
+   "goodChoice": "Paris",
+   "score": 50
+  },
+  {
+   "id": "5e702364-8263-4b94-8a1e-bdc07c636721",
+   "title": "2 + 2 = ?",
+   "choices": [
+    "2",
+    "4",
+    "5"
+   ],
+   "goodChoice": "4",
+   "score": 10
+  }
+ ],
+ "submissions": []
+}

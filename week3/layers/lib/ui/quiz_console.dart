@@ -1,12 +1,15 @@
 import 'dart:io';
 
+import 'package:my_first_project/data/quizRepository.dart';
+
 import '../domain/quiz.dart';
 
 class QuizConsole {
   Quiz quiz;
+  final Quizrepository jsonFile;
 
   Map<String, int> playerScores = {};
-  QuizConsole({required this.quiz});
+  QuizConsole({required this.quiz , required this.jsonFile});
 
   void startQuiz() {
     
@@ -21,6 +24,7 @@ class QuizConsole {
           break;
         }
 
+        // clear prev player answer
         quiz.clearAnswer();
 
         for (var question in quiz.questions) {
@@ -29,7 +33,7 @@ class QuizConsole {
           stdout.write('Your answer: ');
           String? userInput = stdin.readLineSync();
 
-          // Check for null input
+          // Check the input is not null
           if (userInput != null && userInput.isNotEmpty) {
             Answer answer = Answer(question: question, answerChoice: userInput);
             quiz.addAnswer(answer);
@@ -49,6 +53,9 @@ class QuizConsole {
       playerScores.forEach((name, score){
           print("Player : $name      score: $score");
       });
+
+      // recorded player attemped
+      jsonFile.uploadPlayerAttemped(quiz , playerName: userName);
 
     };
     print('--- Quiz Finished ---');    

@@ -35,10 +35,82 @@ main() {
 
   });
 
+  test('One answer worng', () {
+
+    Answer a1 = Answer(question: q1, answerChoice: "1");
+    Answer a2 = Answer(question: q2, answerChoice: "5");
+
+    quiz.answers = [a1, a2];
+
+    expect(quiz.getScoreInPercentage(), equals(((20/50) * 100).toInt()));
+    expect(quiz.getScoreInPoint(), equals(20));
+
+  });
+
+  test('One answer worng', () {
+
+    Answer a1 = Answer(question: q1, answerChoice: "4");
+    Answer a2 = Answer(question: q2, answerChoice: "2");
+
+    quiz.answers = [a1, a2];
+
+    expect(quiz.getScoreInPercentage(), equals(((30/50) * 100).toInt()));
+    expect(quiz.getScoreInPoint(), equals(30));
+
+  });
+
+  test('One answer worng', () {
+
+    Answer a1 = Answer(question: q1, answerChoice: "4");
+    Answer a2 = Answer(question: q2, answerChoice: "1");
+
+    quiz.answers = [a1, a2];
+
+    expect(quiz.getScoreInPercentage(), equals(((30/50) * 100).toInt()));
+    expect(quiz.getScoreInPoint(), equals(30));
+
+  });
+
   test('All answers is wrong', () {
 
     Answer a1 = Answer(question: q1, answerChoice: "2");
     Answer a2 = Answer(question: q2, answerChoice: "2");
+
+    quiz.answers = [a1, a2];
+
+    expect(quiz.getScoreInPercentage(), equals(0));
+    expect(quiz.getScoreInPoint(), equals(0));
+
+  });
+
+  test('All answers is wrong', () {
+
+    Answer a1 = Answer(question: q1, answerChoice: "2");
+    Answer a2 = Answer(question: q2, answerChoice: "1");
+
+    quiz.answers = [a1, a2];
+
+    expect(quiz.getScoreInPercentage(), equals(0));
+    expect(quiz.getScoreInPoint(), equals(0));
+
+  });
+
+  test('All answers is wrong', () {
+
+    Answer a1 = Answer(question: q1, answerChoice: "1");
+    Answer a2 = Answer(question: q2, answerChoice: "2");
+
+    quiz.answers = [a1, a2];
+
+    expect(quiz.getScoreInPercentage(), equals(0));
+    expect(quiz.getScoreInPoint(), equals(0));
+
+  });
+
+  test('All answers is wrong', () {
+
+    Answer a1 = Answer(question: q1, answerChoice: "1");
+    Answer a2 = Answer(question: q2, answerChoice: "1");
 
     quiz.answers = [a1, a2];
 
