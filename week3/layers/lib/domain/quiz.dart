@@ -14,81 +14,71 @@ class Question{
 
 class Answer{
   final String id;
-  final Question question;
+  final String questionId;
   final String answerChoice;
   
 
-  Answer({String? id,required this.question, required this.answerChoice}): id=id ?? uuid.v4();
+  Answer({ String? id, required this.questionId, required this.answerChoice,}) : id = id ?? uuid.v4();
 
-  bool isGood(){
-    return this.answerChoice == question.goodChoice;
+  bool isGood(Question question){
+    return answerChoice == question.goodChoice;
   }
 }
 
-class Quiz{
+class Quiz {
   final String id;
-  List<Question> questions;
-  List <Answer> answers =[];
+  final List<Question> questions;
 
-  Quiz({String? id ,required this.questions}): id= id ?? uuid.v4();
+  Quiz({ String? id, required this.questions,}) : id = id ?? uuid.v4();
 
   Question? getQuestionById(String id){
-      try{
-          return questions.firstWhere((q)=> q.id == id);
-      }catch(e){
-          return null;
-      }
+    try{
+      return questions.firstWhere((q) => q.id == id);
+    }catch (e) {
+      return null;
+    }
+  }
+}
+
+class Submission {
+  final String id;
+  final String quizId;
+  final List<Answer> answers = [];
+
+  Submission({String? id, required this.quizId}) : id = id ?? uuid.v4();
+
+  void addAnswer(Answer answer){
+    answers.add(answer);
+  }
+
+  void clearAnswers(){
+    answers.clear();
   }
 
   Answer? getAnswerById(String id){
-    try{
-      return answers.firstWhere((a)=> a.id == id);
-    }catch(e){
-        return null;
+    try {
+      return answers.firstWhere((a) => a.id == id);
+    } catch (e) {
+      return null;
     }
   }
 
-  void addAnswer(Answer asnwer) {
-     answers.add(asnwer);
-  }
-
-  void clearAnswer(){
-    this.answers.clear();
-  }
-
-  
-  int getScoreInPercentage() {
+  int getScoreInPoint(Quiz quiz){
     int totalScore = 0;
-    int maxScore = 0;
-
-    // calculate the correct answer score 
-    for (Answer answer in answers) {
-      if (answer.isGood()) {
-        totalScore += answer.question.score;
+    for (var answer in answers) {
+      Question? question = quiz.getQuestionById(answer.questionId);
+      if (question != null && answer.isGood(question)) {
+        totalScore += question.score;
       }
     }
-
-    // calculate maximum score of question
-    for (Question question in questions) {
-      maxScore += question.score;
-    }
-
-    // prevent it from division zero
-    if (maxScore == 0){
-      return 0;
-    } 
-
-    return ((totalScore / maxScore) * 100).toInt();
+    return totalScore;
   }
 
-
-  int getScoreInPoint(){
-    int totalSCore =0;
-    for(Answer answer in answers){
-      if (answer.isGood()) {
-        totalSCore += answer.question.score;
-      }
-    }
-    return totalSCore;
+  int getScoreInPercentage(Quiz quiz){
+    int totalScore = getScoreInPoint(quiz);
+    int maxScore = quiz.questions.fold(0, (sum, q) => sum + q.score);
+    return maxScore == 0 ? 0 : ((totalScore / maxScore) * 100).toInt();
   }
 }
+
+

@@ -24,8 +24,7 @@ class QuizConsole {
           break;
         }
 
-        // clear prev player answer
-        quiz.clearAnswer();
+        Submission submission = Submission(quizId: quiz.id);
 
         for (var question in quiz.questions) {
           print('Question: ${question.title} - (${question.score})');
@@ -35,16 +34,16 @@ class QuizConsole {
 
           // Check the input is not null
           if (userInput != null && userInput.isNotEmpty) {
-            Answer answer = Answer(question: question, answerChoice: userInput);
-            quiz.addAnswer(answer);
+            Answer answer = Answer(questionId: question.id, answerChoice: userInput);
+            submission.addAnswer(answer);
           } else {
             print('No answer entered. Skipping question.');
           }
           print('');
         }
 
-      int scoreInPercentage = quiz.getScoreInPercentage();
-      int scoreInPoint = quiz.getScoreInPoint();
+      int scoreInPercentage = submission.getScoreInPercentage(quiz);
+      int scoreInPoint = submission.getScoreInPoint(quiz);
       playerScores[userName] = scoreInPoint;
 
       print('$userName, Your score: in percentage: $scoreInPercentage %');
@@ -55,7 +54,7 @@ class QuizConsole {
       });
 
       // recorded player attemped
-      jsonFile.uploadPlayerAttemped(quiz , playerName: userName);
+      jsonFile.uploadPlayerAttempted(quiz, submission, playerName: userName);
 
     };
     print('--- Quiz Finished ---');    

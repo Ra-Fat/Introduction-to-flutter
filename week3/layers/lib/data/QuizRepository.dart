@@ -39,8 +39,7 @@ class Quizrepository {
 
 
     // At player info attemp to file
-    void uploadPlayerAttemped(Quiz quiz , {required String playerName}){
-
+    void uploadPlayerAttempted(Quiz quiz, Submission submission, {required String playerName}){
         final jsonFile = File(filePath);
         jsonFile.parent.createSync(recursive: true);
         if (!jsonFile.existsSync() || jsonFile.readAsStringSync().isEmpty) {
@@ -55,9 +54,9 @@ class Quizrepository {
 
         Map<String, dynamic> playerData = {
             'player': playerName,
-            'score': quiz.getScoreInPoint(),
-            'answers': quiz.answers.map((a) => {
-              'questionId': a.question.id,
+            'score': submission.getScoreInPoint(quiz),
+            'answers': submission.answers.map((a) => {
+              'questionId': a.questionId,
               'chosenAnswer': a.answerChoice
             }).toList()
         };

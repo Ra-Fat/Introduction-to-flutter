@@ -13,110 +13,99 @@ main() {
 
   test('All answers are good (100%)', () {
     
-    Answer a1 = Answer(question: q1, answerChoice: "4");
-    Answer a2 = Answer(question: q2, answerChoice: "5");
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "4"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "5"));
 
-    quiz.answers = [a1, a2];
-
-    expect(quiz.getScoreInPercentage(), equals(100));
-    expect(quiz.getScoreInPoint(), equals(50));
-
-  });
-
-  test('One answer worng', () {
-
-    Answer a1 = Answer(question: q1, answerChoice: "2");
-    Answer a2 = Answer(question: q2, answerChoice: "5");
-
-    quiz.answers = [a1, a2];
-
-    expect(quiz.getScoreInPercentage(), equals(((20/50) * 100).toInt()));
-    expect(quiz.getScoreInPoint(), equals(20));
+    expect(submission.getScoreInPoint(quiz), equals(50));
+    expect(submission.getScoreInPercentage(quiz), equals(100));
 
   });
 
-  test('One answer worng', () {
+  test('First answer wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "2"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "5"));
 
-    Answer a1 = Answer(question: q1, answerChoice: "1");
-    Answer a2 = Answer(question: q2, answerChoice: "5");
-
-    quiz.answers = [a1, a2];
-
-    expect(quiz.getScoreInPercentage(), equals(((20/50) * 100).toInt()));
-    expect(quiz.getScoreInPoint(), equals(20));
-
+    expect(submission.getScoreInPoint(quiz), equals(20));
+    expect(submission.getScoreInPercentage(quiz), equals(((20 / 50) * 100).toInt()));
   });
 
-  test('One answer worng', () {
 
-    Answer a1 = Answer(question: q1, answerChoice: "4");
-    Answer a2 = Answer(question: q2, answerChoice: "2");
+  test('Second answer wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "4"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "2"));
 
-    quiz.answers = [a1, a2];
-
-    expect(quiz.getScoreInPercentage(), equals(((30/50) * 100).toInt()));
-    expect(quiz.getScoreInPoint(), equals(30));
-
+    expect(submission.getScoreInPoint(quiz), equals(30));
+    expect(submission.getScoreInPercentage(quiz), equals(((30 / 50) * 100).toInt()));
   });
 
-  test('One answer worng', () {
+  test('Second answer wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "4"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "2"));
 
-    Answer a1 = Answer(question: q1, answerChoice: "4");
-    Answer a2 = Answer(question: q2, answerChoice: "1");
-
-    quiz.answers = [a1, a2];
-
-    expect(quiz.getScoreInPercentage(), equals(((30/50) * 100).toInt()));
-    expect(quiz.getScoreInPoint(), equals(30));
-
+    expect(submission.getScoreInPoint(quiz), equals(30));
+    expect(submission.getScoreInPercentage(quiz), equals(((30 / 50) * 100).toInt()));
   });
 
-  test('All answers is wrong', () {
+  test('First answer wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "1"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "5"));
 
-    Answer a1 = Answer(question: q1, answerChoice: "2");
-    Answer a2 = Answer(question: q2, answerChoice: "2");
+    expect(submission.getScoreInPoint(quiz), equals(20));
+    expect(submission.getScoreInPercentage(quiz), equals(((20 / 50) * 100).toInt()));
+  });
 
-    quiz.answers = [a1, a2];
+  test('Second answer worng', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "4"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "1"));
 
-    expect(quiz.getScoreInPercentage(), equals(0));
-    expect(quiz.getScoreInPoint(), equals(0));
+    expect(submission.getScoreInPercentage(quiz), equals(((30/50) * 100).toInt()));
+    expect(submission.getScoreInPoint(quiz), equals(30));
 
   });
 
   test('All answers is wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "2"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "2"));
 
-    Answer a1 = Answer(question: q1, answerChoice: "2");
-    Answer a2 = Answer(question: q2, answerChoice: "1");
 
-    quiz.answers = [a1, a2];
-
-    expect(quiz.getScoreInPercentage(), equals(0));
-    expect(quiz.getScoreInPoint(), equals(0));
-
-  });
-
-  test('All answers is wrong', () {
-
-    Answer a1 = Answer(question: q1, answerChoice: "1");
-    Answer a2 = Answer(question: q2, answerChoice: "2");
-
-    quiz.answers = [a1, a2];
-
-    expect(quiz.getScoreInPercentage(), equals(0));
-    expect(quiz.getScoreInPoint(), equals(0));
+    expect(submission.getScoreInPercentage(quiz), equals(0));
+    expect(submission.getScoreInPoint(quiz), equals(0));
 
   });
 
   test('All answers is wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "2"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "1"));
 
-    Answer a1 = Answer(question: q1, answerChoice: "1");
-    Answer a2 = Answer(question: q2, answerChoice: "1");
+    expect(submission.getScoreInPoint(quiz), equals(0));
+    expect(submission.getScoreInPercentage(quiz), equals(0));
+  });
 
-    quiz.answers = [a1, a2];
+  test('All answers is wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "1"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "2"));
 
-    expect(quiz.getScoreInPercentage(), equals(0));
-    expect(quiz.getScoreInPoint(), equals(0));
+
+    expect(submission.getScoreInPercentage(quiz), equals(0));
+    expect(submission.getScoreInPoint(quiz), equals(0));
 
   });
 
+  test('All answers wrong', () {
+    Submission submission = Submission(quizId: quiz.id);
+    submission.addAnswer(Answer(questionId: q1.id, answerChoice: "1"));
+    submission.addAnswer(Answer(questionId: q2.id, answerChoice: "1"));
+
+    expect(submission.getScoreInPoint(quiz), equals(0));
+    expect(submission.getScoreInPercentage(quiz), equals(0));
+  });
 }

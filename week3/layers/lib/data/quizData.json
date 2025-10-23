@@ -26,7 +26,7 @@
  ],
  "submissions": [
   {
-   "player": "jack",
+   "player": "Jack",
    "score": 60,
    "answers": [
     {
@@ -50,34 +50,6 @@
     {
      "questionId": "2fe9d6b1-d585-4b5d-9496-b8f952a88223",
      "chosenAnswer": "2"
-    }
-   ]
-  },
-  {
-   "player": "Hill",
-   "score": 50,
-   "answers": [
-    {
-     "questionId": "9b7be53b-2036-4dc5-ac72-a97a95bbe385",
-     "chosenAnswer": "Paris"
-    },
-    {
-     "questionId": "2fe9d6b1-d585-4b5d-9496-b8f952a88223",
-     "chosenAnswer": "2"
-    }
-   ]
-  },
-  {
-   "player": "Ha",
-   "score": 60,
-   "answers": [
-    {
-     "questionId": "9b7be53b-2036-4dc5-ac72-a97a95bbe385",
-     "chosenAnswer": "Paris"
-    },
-    {
-     "questionId": "2fe9d6b1-d585-4b5d-9496-b8f952a88223",
-     "chosenAnswer": "4"
     }
    ]
   }
