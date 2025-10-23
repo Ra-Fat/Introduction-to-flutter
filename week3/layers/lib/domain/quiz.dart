@@ -51,10 +51,6 @@ class Submission {
     answers.add(answer);
   }
 
-  void clearAnswers(){
-    answers.clear();
-  }
-
   Answer? getAnswerById(String id){
     try {
       return answers.firstWhere((a) => a.id == id);
