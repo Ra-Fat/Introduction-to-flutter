@@ -32,7 +32,6 @@ class QuizConsole {
           stdout.write('Your answer: ');
           String? userInput = stdin.readLineSync();
 
-          // Check the input is not null
           if (userInput != null && userInput.isNotEmpty) {
             Answer answer = Answer(questionId: question.id, answerChoice: userInput);
             submission.addAnswer(answer);
@@ -53,7 +52,6 @@ class QuizConsole {
           print("Player : $name      score: $score");
       });
 
-      // recorded player attemped
       jsonFile.uploadPlayerAttempted(quiz, submission, playerName: userName);
 
     };

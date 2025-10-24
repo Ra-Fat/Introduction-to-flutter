@@ -75,6 +75,31 @@ class Submission {
     int maxScore = quiz.questions.fold(0, (sum, q) => sum + q.score);
     return maxScore == 0 ? 0 : ((totalScore / maxScore) * 100).toInt();
   }
+
+  void insertPlayerData(Map<String, dynamic> data, Quiz quiz, {required String playerName}){
+    List<dynamic> submissions = data['submissions'] ?? [];
+
+    int playerIndex = submissions.indexWhere((s) => s['player'] == playerName);
+
+    Map<String, dynamic> playerData = {
+      'player': playerName,
+      'score': getScoreInPoint(quiz),
+      'answers': answers
+          .map((a) => {
+                'questionId': a.questionId,
+                'chosenAnswer': a.answerChoice,
+              })
+          .toList()
+    };
+
+    if (playerIndex >= 0) {
+      submissions[playerIndex] = playerData;
+    } else {
+      submissions.add(playerData);
+    }
+
+    data['submissions'] = submissions;
+  }
 }
 
 

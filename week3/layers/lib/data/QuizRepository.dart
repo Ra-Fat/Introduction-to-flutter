@@ -2,18 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 import '../domain/quiz.dart';
 
-
 class Quizrepository {
     final String filePath ;
     Quizrepository(this.filePath);
 
-    // Get the quiz from file
     Quiz getQuiz(){
+
         final jsonFile = File(filePath);
         if(!jsonFile.existsSync()){
             throw Exception('file not found 404');
         }
-
 
         // get data as string then convert it into map or list
         final data = jsonDecode(jsonFile.readAsStringSync());
@@ -37,68 +35,18 @@ class Quizrepository {
         return quiz;
     }
 
-
-    // At player info attemp to file
     void uploadPlayerAttempted(Quiz quiz, Submission submission, {required String playerName}){
+
         final jsonFile = File(filePath);
         jsonFile.parent.createSync(recursive: true);
-        if (!jsonFile.existsSync() || jsonFile.readAsStringSync().isEmpty) {
+        if (!jsonFile.existsSync() || jsonFile.readAsStringSync().isEmpty){
             throw Exception('file does not exist or it is empty.');
         }
-        
-        // get data as string then convert it into map or list
+
         final data = jsonDecode(jsonFile.readAsStringSync());
-        List<dynamic> submissions = data['submissions'] ?? [];
 
-        int playerExisted = submissions.indexWhere((s)=> s['player'] == playerName);
+        submission.insertPlayerData(data, quiz, playerName: playerName);
 
-        Map<String, dynamic> playerData = {
-            'player': playerName,
-            'score': submission.getScoreInPoint(quiz),
-            'answers': submission.answers.map((a) => {
-              'questionId': a.questionId,
-              'chosenAnswer': a.answerChoice
-            }).toList()
-        };
-
-        // Check if the user already attemp the quiz
-        if(playerExisted >= 0){
-            // Overwrite the prev data of them
-            submissions[playerExisted] = playerData;
-        }else{
-            submissions.add(playerData);
-        }
-
-        data['submissions'] = submissions;
-
-        // upload player attemped data to file as json format
-        jsonFile.writeAsStringSync(JsonEncoder.withIndent(' ').convert(data));
-    }
-
-    // Create the quiz if it not exist
-    void createDefaultQuiz(Quiz quiz){
-        final jsonFile = File(filePath);
-        jsonFile.parent.createSync(recursive: true);
-
-        Map<String, dynamic> data = {};
-        if (jsonFile.existsSync() && jsonFile.readAsStringSync().isNotEmpty) {
-          data = jsonDecode(jsonFile.readAsStringSync());
-        }
-
-        data['id'] = quiz.id;
-        data['questions'] = quiz.questions.map((q)=>{
-            'id': q.id,
-            'title': q.title,
-            'choices': q.choices,
-            'goodChoice': q.goodChoice,
-            'score': q.score,
-        }).toList();
-
-        if (!data.containsKey('submissions')){
-            data['submissions'] = [];
-        }
-
-        // Write quiz data to file as json format
         jsonFile.writeAsStringSync(JsonEncoder.withIndent(' ').convert(data));
     }
 }
