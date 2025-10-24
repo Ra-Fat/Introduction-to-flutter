@@ -6,7 +6,7 @@ void main() {
 
   final quiz = file.getQuiz();
 
-  if (quiz.questions.isEmpty) {
+  if (quiz.questions.isEmpty){
     throw Exception('Quiz has no questions.');
   }
 

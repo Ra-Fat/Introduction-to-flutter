@@ -45,7 +45,7 @@ class Quizrepository {
 
         final data = jsonDecode(jsonFile.readAsStringSync());
 
-        submission.insertPlayerData(data, quiz, playerName: playerName);
+        submission.insertPlayerSubmission(data, quiz, playerName: playerName);
 
         jsonFile.writeAsStringSync(JsonEncoder.withIndent(' ').convert(data));
     }

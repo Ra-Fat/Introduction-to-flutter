@@ -76,7 +76,7 @@ class Submission {
     return maxScore == 0 ? 0 : ((totalScore / maxScore) * 100).toInt();
   }
 
-  void insertPlayerData(Map<String, dynamic> data, Quiz quiz, {required String playerName}){
+  void insertPlayerSubmission(Map<String, dynamic> data, Quiz quiz, {required String playerName}){
     List<dynamic> submissions = data['submissions'] ?? [];
 
     int playerIndex = submissions.indexWhere((s) => s['player'] == playerName);
