@@ -24,5 +24,62 @@
    "score": 10
   }
  ],
- "submissions": []
+ "submissions": [
+  {
+   "player": "jack",
+   "score": 50,
+   "answers": [
+    {
+     "questionId": "657cdc83-41b3-4b22-8b3a-6989b49257ea",
+     "chosenAnswer": "Paris"
+    },
+    {
+     "questionId": "5e702364-8263-4b94-8a1e-bdc07c636721",
+     "chosenAnswer": "2"
+    }
+   ]
+  },
+  {
+   "player": "jil",
+   "score": 60,
+   "answers": [
+    {
+     "questionId": "657cdc83-41b3-4b22-8b3a-6989b49257ea",
+     "chosenAnswer": "Paris"
+    },
+    {
+     "questionId": "5e702364-8263-4b94-8a1e-bdc07c636721",
+     "chosenAnswer": "4"
+    }
+   ]
+  },
+  {
+   "player": "jill",
+   "score": 60,
+   "answers": [
+    {
+     "questionId": "657cdc83-41b3-4b22-8b3a-6989b49257ea",
+     "chosenAnswer": "Paris"
+    },
+    {
+     "questionId": "5e702364-8263-4b94-8a1e-bdc07c636721",
+     "chosenAnswer": "4"
+    }
+   ]
+  },
+  {
+   "player": "Jack",
+   "score": 60,
+   "answers": [
+    {
+     "questionId": "657cdc83-41b3-4b22-8b3a-6989b49257ea",
+     "chosenAnswer": "Paris"
+    },
+    {
+     "questionId": "5e702364-8263-4b94-8a1e-bdc07c636721",
+     "chosenAnswer": "4"
+    }
+   ]
+  }
+ ]
 }

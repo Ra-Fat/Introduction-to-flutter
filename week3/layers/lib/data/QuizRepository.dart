@@ -13,10 +13,8 @@ class Quizrepository {
             throw Exception('file not found 404');
         }
 
-        // get data as string then convert it into map or list
         final data = jsonDecode(jsonFile.readAsStringSync());
 
-        // Retrive data from question 
         final questionInFile = data['questions'] as List<dynamic>;
         final questions = questionInFile.map((q){
             return Question(
