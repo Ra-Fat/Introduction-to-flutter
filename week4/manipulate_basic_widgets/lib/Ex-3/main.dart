@@ -12,15 +12,10 @@ void main() {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                  CustomCard(text: "OOP", color: Colors.blue[100]!,),
-                  CustomCard(text: "DART", color: Colors.blue[300]!,),
-                  CustomCard(
-                    text: "FLUTTER",
-                    gradient: LinearGradient(colors: [
-                      Colors.blue[300]!,
-                      Colors.blue[600]!
-                    ]),
-                  ),
+                  CustomCard(text: "OOP", firstColor: Colors.blue[100]),
+                  CustomCard(text: "DART", firstColor: Colors.blue[300]),
+                  CustomCard(text: "FLUTTER", firstColor: Colors.blue[300], secondColor: Colors.blue[600],),
+                  
               ],
           ),
       ),
@@ -31,13 +26,13 @@ void main() {
 
 class CustomCard extends StatelessWidget {
   final String text;
-  final Color? color;
-  final Gradient? gradient;
+  final Color? firstColor;
+  final Color? secondColor;
   const CustomCard({
-      super.key,
       required this.text,
-      this.color = Colors.blue,
-      this.gradient
+      this.firstColor,
+      this.secondColor,
+      super.key
     });
 
   @override
@@ -47,9 +42,11 @@ class CustomCard extends StatelessWidget {
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.symmetric(vertical: 20),
         decoration: BoxDecoration(
-          color: gradient == null ? color : null,
-          gradient: gradient,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(30),
+          color: (firstColor != null && secondColor == null) ? firstColor : null,
+          gradient: (firstColor != null && secondColor != null)
+              ? LinearGradient(colors: [firstColor!, secondColor!])
+              : null,
         ),
         child: Text(
           text,
