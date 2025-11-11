@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-class WeatherCard extends StatefulWidget {
+class WeatherCard extends StatelessWidget {
   final String city;
   final double currentTemperature;
   final double minTemperature;
@@ -20,12 +19,6 @@ class WeatherCard extends StatefulWidget {
   });
 
   @override
-  State<WeatherCard> createState() => _WeatherCardState();
-}
-
-class _WeatherCardState extends State<WeatherCard> {
-  @override
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
@@ -34,11 +27,11 @@ class _WeatherCardState extends State<WeatherCard> {
         borderRadius: BorderRadius.circular(15),
         clipBehavior: Clip.antiAlias,
         child: Container(
-          padding: EdgeInsets.only(left: 15),
+          padding: const EdgeInsets.only(left: 15),
           height: 120,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: widget.backgroundColor,
+              colors: backgroundColor,
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -48,7 +41,7 @@ class _WeatherCardState extends State<WeatherCard> {
               CircleAvatar(
                 radius: 25,
                 backgroundColor: Colors.white,
-                child: ClipOval(child: widget.image),
+                child: ClipOval(child: image),
               ),
               const SizedBox(width: 15),
               Expanded(
@@ -57,21 +50,21 @@ class _WeatherCardState extends State<WeatherCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.city,
-                      style: TextStyle(
+                      city,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
-                      "Min ${widget.minTemperature} °C",
-                      style: TextStyle(color: Colors.white, fontSize: 12),
+                      "Min $minTemperature °C",
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
                     Text(
-                      "Max ${widget.maxTemperature} °C",
-                      style: TextStyle(color: Colors.white, fontSize: 12),
+                      "Max $maxTemperature °C",
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
                   ],
                 ),
@@ -81,19 +74,18 @@ class _WeatherCardState extends State<WeatherCard> {
                 children: [
                   Container(
                     height: double.infinity,
-                    // width: double.infinity,
                     width: 130,
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.1),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(60),
                         bottomLeft: Radius.circular(50),
                       ),
                     ),
                   ),
                   Text(
-                    "${widget.currentTemperature} °C",
-                    style: TextStyle(
+                    "$currentTemperature °C",
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 25,
                       fontWeight: FontWeight.bold,

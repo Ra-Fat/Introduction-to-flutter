@@ -28,35 +28,30 @@ enum Product {
   });
 }
 
-class ProductCard extends StatefulWidget {
+class ProductCard extends StatelessWidget {
   final Product type;
   const ProductCard({super.key, required this.type});
 
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        margin: EdgeInsets.only(bottom: 15),
+        margin: const EdgeInsets.only(bottom: 15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(widget.type.image, height: 70),
-              SizedBox(height: 8),
+              Image.asset(type.image, height: 70),
+              const SizedBox(height: 8),
               Text(
-                widget.type.title,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+                type.title,
+                style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
               ),
-              SizedBox(height: 6),
-              Text(widget.type.description),
+              const SizedBox(height: 6),
+              Text(type.description),
             ],
           ),
         ),
