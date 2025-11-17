@@ -24,7 +24,6 @@ class HobbyCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          
           Padding(
             padding: EdgeInsets.only(left: 30),
             child: Icon(icon, color: Colors.white),
