@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './score_card.dart';
+import 'score_card.dart';
 
 void main() => runApp(
   MaterialApp(
