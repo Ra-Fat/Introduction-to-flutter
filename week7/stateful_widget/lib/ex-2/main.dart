@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import './favorite_card.dart';
-
+import 'favorite_card.dart';
 void main() => runApp(
   MaterialApp(
     debugShowCheckedModeBanner: false,

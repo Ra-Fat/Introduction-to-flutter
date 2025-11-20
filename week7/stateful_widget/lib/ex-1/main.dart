@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import './custom_button.dart';
-
+import 'custom_button.dart';
 void main() => runApp(
   MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: Scaffold(
       appBar: AppBar(title: const Text("Custom buttons")),
       body: Center(

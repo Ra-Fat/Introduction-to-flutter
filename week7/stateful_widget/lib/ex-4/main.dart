@@ -7,8 +7,6 @@ void main() => runApp(
     home: Scaffold(
       body: Container(
         color: Colors.green,
-        width: double.infinity,
-        height: double.infinity,
         padding: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Column(
@@ -18,9 +16,6 @@ void main() => runApp(
               ScoreCard(subject: "Dart"),
               ScoreCard(subject: "Cyber"),
               ScoreCard(subject: "React"),
-              ScoreCard(subject: "C#"),
-              ScoreCard(subject: "Backend"),
-              ScoreCard(subject: "Frontend"),
             ],
           ),
         ),
