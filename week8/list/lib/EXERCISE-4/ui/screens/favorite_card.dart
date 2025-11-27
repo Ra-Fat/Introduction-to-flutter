@@ -24,17 +24,13 @@ class _FavoriteJokesContainerState extends State<FavoriteCardContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: List.generate(
-          jokes.length,
-          (index) => FavoriteCard(
-            title: jokes[index].title,
-            description: jokes[index].description,
-            isFavorite: favoriteJokeIndex == index,
-            onFavorite: () => onFavoritedSelected(index),
-          ),
-        ),
+    return ListView.builder(
+      itemCount: jokes.length,
+      itemBuilder: (context, index) => FavoriteCard(
+          title: jokes[index].title,
+          description: jokes[index].description,
+          isFavorite: favoriteJokeIndex == index,
+          onFavorite: () => onFavoritedSelected(index),
       ),
     );
   }
