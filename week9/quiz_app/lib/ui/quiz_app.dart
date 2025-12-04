@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import './welcome_screen.dart';
-import './result_screen.dart';
-import './history_screen.dart';
-import './question_screen.dart';
-import '../../data/repositories/quiz_mock_repository.dart';
-import '../../model/quiz_model.dart';
+import 'screen/welcome_screen.dart';
+import 'screen/result_screen.dart';
+import 'screen/history_screen.dart';
+import '../model/answers_model.dart';
+import 'screen/question_screen.dart';
+import '../data/repositories/quiz_mock_repository.dart';
+import '../model/quiz_model.dart';
 
 enum Screen { startScreen, questionScreen, resultScreen, historyScreen }
 

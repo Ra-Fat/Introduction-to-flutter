@@ -1,4 +1,6 @@
 import '../../model/quiz_model.dart';
+import '../../model/questions_model.dart';
+
 
 Quiz mockQuiz() {
   return Quiz(
@@ -19,5 +21,6 @@ Quiz mockQuiz() {
         correctAnswer: '2',
       ),
     ],
+    answers: [],
   );
 }

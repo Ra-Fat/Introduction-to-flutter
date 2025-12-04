@@ -1,14 +1,18 @@
 import 'package:uuid/uuid.dart';
+import './questions_model.dart';
+import './answers_model.dart';
 
 var uuid = Uuid();
 
 class Quiz {
   final String id;
   final List<Question> questions;
+  final List<Answer> answers;
 
   Quiz({
     String? id,
     required this.questions,
+    required this.answers,
   }): id = id ?? uuid.v4();
 
   int calculateScore(List<Answer> answers) {
@@ -26,36 +30,5 @@ class Quiz {
   }
 }
 
-class Question {
-  final String id;
-  final String title;
-  final List<String> answers;
-  final String correctAnswer;
 
-  Question({
-    String? id,
-    required this.title,
-    required this.answers,
-    required this.correctAnswer,
-  }): id = id ?? uuid.v4();
 
-  bool isCorrectAnswer(String answer){
-    return answer == correctAnswer;
-  }
-}
-
-class Answer {
-  final String id;
-  final String questionId;
-  final String answerChoice;
-
-  Answer({
-    String? id,
-    required this.questionId,
-    required this.answerChoice
-  }): id = id ?? uuid.v4();
-
-  bool isCorrect(Question question){
-    return answerChoice == question.correctAnswer;
-  } 
-}
