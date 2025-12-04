@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/quiz_model.dart';
 import '../../model/answers_model.dart';
-import '../widgets/theme.dart';
+import '../theme/theme.dart';
+import '../widgets/custom_button.dart';
 
 class ResultScreen extends StatelessWidget {
   final List<Answer> playerAnswer;
@@ -36,51 +37,16 @@ class ResultScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            ElevatedButton(
+            CustomButton(
+              label: 'Restart Quiz', 
               onPressed: onRestart,
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(200, 50),
-                backgroundColor: Colors.red,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                'Restart Quiz',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              backgroundColor: Colors.red,
             ),
             SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: onViewHistory,
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(200, 50),
-                backgroundColor: AppColor.buttonColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.history, color: Colors.white),
-                  SizedBox(width: 8),
-                  Text(
-                    'View History',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            CustomButton(
+              label: 'View History', 
+              onPressed: onViewHistory
+            )
           ],
         ),
       ),

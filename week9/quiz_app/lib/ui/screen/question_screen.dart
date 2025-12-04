@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/theme.dart';
+import '../theme/theme.dart';
 import '../../model/questions_model.dart';
 import '../../model/answers_model.dart';
 

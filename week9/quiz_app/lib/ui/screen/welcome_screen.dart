@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/theme.dart';
+import '../theme/theme.dart';
+import '../widgets/custom_button.dart';
 
 class StartScreen extends StatelessWidget {
   final VoidCallback onStart;
@@ -20,23 +21,9 @@ class StartScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             SizedBox(height: 60),
-            ElevatedButton(
-              onPressed: onStart,
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(200, 60),
-                backgroundColor: AppColor.buttonColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              child: Text(
-                "START",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
+            CustomButton(
+              label: "START", 
+              onPressed: onStart
             ),
           ],
         ),

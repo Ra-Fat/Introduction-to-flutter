@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/model/quiz_model.dart';
-import '../widgets/theme.dart';
+import '../theme/theme.dart';
 import '../../model/answers_model.dart';
-
 
 class HistoryScreen extends StatelessWidget {
   final List<List<Answer>> history;
