@@ -22,6 +22,7 @@ class _QuizAppState extends State<QuizApp> {
   List<List<Answer>> history = [];
   int currentQuestionIndex = 0;
   List<Answer> playerAnswers = [];
+  int score = 0;
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _QuizAppState extends State<QuizApp> {
       currentScreen = Screen.questionScreen;
       currentQuestionIndex = 0;
       playerAnswers = [];
+      score = 0;
     });
   }
 
@@ -47,6 +49,7 @@ class _QuizAppState extends State<QuizApp> {
     } else {
       setState(() {
         history.add(List<Answer>.from(playerAnswers));
+        score = quiz.calculateScore(playerAnswers);
         currentScreen = Screen.resultScreen;
       });
     }
@@ -69,6 +72,7 @@ class _QuizAppState extends State<QuizApp> {
       currentScreen = Screen.startScreen;
       playerAnswers = [];
       currentQuestionIndex = 0;
+      score = 0;
     });
   }
 
@@ -84,8 +88,8 @@ class _QuizAppState extends State<QuizApp> {
         );
       case Screen.resultScreen:
         return ResultScreen(
-          playerAnswer: playerAnswers,
-          quiz: quiz,
+          score: score,
+          totalQuestions: quiz.questions.length,
           onRestart: onRestart,
           onViewHistory: onShowHistory,
         );

@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/model/quiz_model.dart';
-import '../../model/answers_model.dart';
 import '../theme/theme.dart';
 import '../widgets/custom_button.dart';
 
 class ResultScreen extends StatelessWidget {
-  final List<Answer> playerAnswer;
-  final Quiz quiz;
+  final int score;
+  final int totalQuestions;
   final VoidCallback onRestart;
   final VoidCallback onViewHistory;
   const ResultScreen({
     super.key,
-    required this.playerAnswer,
-    required this.quiz,
+    required this.score,
+    required this.totalQuestions,
     required this.onRestart,
     required this.onViewHistory,
   });
 
   @override
   Widget build(BuildContext context) {
-    final totalQuestions = quiz.questions.length;
-    final score = quiz.calculateScore(playerAnswer);
 
     return Scaffold(
       backgroundColor: AppColor.backgroundColor,
