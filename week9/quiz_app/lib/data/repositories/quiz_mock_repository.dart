@@ -17,7 +17,7 @@ Quiz mockQuiz() {
       ),
       Question(
         title: 'what 1+1 = ?',
-        answers: ['2', '3', '1', '0'],
+        answers: ['0', '3', '1', '2'],
         correctAnswer: '2',
       ),
     ],
