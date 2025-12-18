@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/expense.dart';
+import './expense_summary.dart';
 import 'expense_form.dart';
 import 'expense_item.dart';
 
@@ -35,7 +36,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       builder: (c) => Center(child: ExpenseForm()),
     );
 
-    if(newExpense == null){
+    if (newExpense == null) {
       return;
     }
     setState(() {
@@ -59,10 +60,33 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       ),
       body: _expenses.isEmpty
           ? Center(child: Text("No expense found. Start adding some"))
-          : ListView.builder(
-              itemCount: _expenses.length,
-              itemBuilder: (context, index) =>
-                  ExpenseItem(expense: _expenses[index]),
+          : Padding(
+              padding: EdgeInsets.all(12),
+              child: Column(
+                children: [
+                  ExpenseSummery(expenses: _expenses),
+                  SizedBox(height: 6),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: _expenses.length,
+                      itemBuilder: (context, index) => Dismissible(
+                        key: ValueKey(_expenses[index]),
+                        onDismissed: (direction) {
+                          setState(() {
+                            _expenses.removeAt(index);
+                          });
+
+                          // message after remove
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Expense deleted")),
+                          );
+                        },
+                        child: ExpenseItem(expense: _expenses[index]),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
     );
   }

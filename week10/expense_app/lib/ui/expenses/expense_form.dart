@@ -10,53 +10,91 @@ class ExpenseForm extends StatefulWidget {
 
 class _ExpenseFormState extends State<ExpenseForm> {
   final _titleController = TextEditingController();
-  final _priceController = TextEditingController();
-  Category _selectCategory = Category.food;
+  final _amountController = TextEditingController();
+  Category _selectedCategory = Category.food;
+  DateTime? _selectedDate;
 
-  @override
-  void dispose() {
-    super.dispose();
-    _priceController.dispose();
-    _titleController.dispose();
+  Future<void> _selectDate() async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2025, 12, 25),
+      firstDate: DateTime(2025),
+      lastDate: DateTime(2026),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    }
   }
 
-  void _showErrorDialog(String message){
+  void _showWarning(String message) {
     showDialog(
-      context: context, 
+      context: context,
       builder: (ctx) => AlertDialog(
-        title: Text("Invalid Input"),
-        
-      ) 
+        title: Text('Warning'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text('OK'),
+          ),
+        ],
+      ),
     );
+  }
+
+  bool isValid() {
+    String title = _titleController.text.trim();
+    String amountText = _amountController.text.trim();
+    double? amount = double.tryParse(amountText);
+
+    if (title.isEmpty) {
+      _showWarning("The title can not empty");
+      return false;
+    }
+
+    if (amount == null || amount <= 0) {
+      _showWarning("The amount must be valid");
+      return false;
+    }
+
+    if (_selectedDate == null) {
+      _showWarning("Please select a date.");
+      return false;
+    }
+
+    return true;
   }
 
 
   void onCreate() {
-    //  1 Build an expense
-    String title = _titleController.text;
-    double? amount = double.tryParse(_priceController.text);
-    Category category = Category.food;
-    DateTime date = DateTime.now();
-
-
-
-
-    if(title.isEmpty){
-      
+    if (!isValid()) {
+      return;
     }
+
+    String title = _titleController.text.trim();
+    double amount = double.parse(_amountController.text);
 
     Expense newExpense = Expense(
       title: title,
-      amount: amount ?? 0.0,
-      date: date,
-      category: category,
+      amount: amount,
+      date: _selectedDate ?? DateTime.now(),
+      category: _selectedCategory,
     );
-
     Navigator.pop(context, newExpense);
   }
 
   void onCancel() {
     Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _titleController.dispose();
+    _amountController.dispose();
   }
 
   @override
@@ -72,60 +110,89 @@ class _ExpenseFormState extends State<ExpenseForm> {
             maxLength: 50,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: TextField(
-                  controller: _priceController,
-                  decoration: InputDecoration(label: Text("Price")),
+                  controller: _amountController,
+                  decoration: InputDecoration(label: Text("Amount")),
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              SizedBox(width: 16),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      _selectedDate == null
+                          ? "No Date Selected"
+                          : "${_selectedDate!.month}/${_selectedDate!.day}/${_selectedDate!.year}",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    IconButton(
+                      onPressed: _selectDate,
+                      icon: Icon(Icons.calendar_month),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
+          SizedBox(height: 20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DropdownButton(
-                value: _selectCategory,
-                items: Category.values.map((c) {
-                  return DropdownMenuItem(
-                    value: c,
-                    child: Text(c.name.toUpperCase()),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectCategory = value!;
-                  });
-                },
+              Expanded(
+                child: DropdownButton(
+                  value: _selectedCategory,
+                  isExpanded: true,
+                  items: Category.values.map((category) {
+                    return DropdownMenuItem(
+                      value: category,
+                      child: Row(
+                        children: [
+                          Icon(Expense.expenseIcon(category)),
+                          SizedBox(width: 8),
+                          Text(category.name.toUpperCase()),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (Category? newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        _selectedCategory = newValue;
+                      });
+                    }
+                  },
+                ),
               ),
               Expanded(
                 flex: 2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    // ElevatedButton(
-                    //   onPressed: onCancel,
-                      
-                    //   style: ButtonStyle(
-                    //     backgroundColor: WidgetStatePropertyAll(Colors.white)
-                    //   ),
-                    //   child: Text("Cancel"),
-                    // ),
-                    GestureDetector(
-                      onTap: onCancel,
-                      child: Text("Cancel"),
+                    TextButton(
+                      onPressed: onCancel,
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(width: 12),
                     ElevatedButton(
                       onPressed: onCreate,
                       style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.blue),
+                        backgroundColor: WidgetStateProperty.all(Colors.blue),
+                        padding: WidgetStateProperty.all(EdgeInsets.all(17)),
                       ),
-                      child: Text("Save Expense",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                      ),),
+                      child: Text(
+                        "Save Expense",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),

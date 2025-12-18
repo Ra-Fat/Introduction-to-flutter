@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
@@ -21,5 +22,18 @@ class Expense {
   @override
   String toString() {
     return "Expense $title , amount $amount";
+  }
+
+  static IconData expenseIcon(Category category) {
+    switch (category) {
+      case Category.food:
+        return Icons.free_breakfast;
+      case Category.travel:
+        return Icons.travel_explore;
+      case Category.leisure:
+        return Icons.holiday_village;
+      case Category.work:
+        return Icons.work;
+    }
   }
 }
